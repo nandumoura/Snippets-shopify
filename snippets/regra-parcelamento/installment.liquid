@@ -1,0 +1,48 @@
+{% if settings.installment_enable %}
+  {%- assign qtdParcel = settings.installment | replace: 'x', '' | times: 1 -%}
+  {% unless settings.min_parcel contains "," %}
+  {%- assign minParcel = settings.min_parcel | append: '00'| times: 1 -%}
+  {% else %}
+  {%- assign minParcel = settings.min_parcel | replace: ',', '' | times: 1 -%}
+  {% endunless %}
+
+  {%- assign priceParcel = product.price | divided_by: settings.installment | replace: 'x', '' | times: 1 -%}
+  {%- assign fixedFees = settings.is_fixed -%}
+  {%- assign valjuros = settings.juros | replace: '%', ''| append: '.0' | idvided_by: 100 |plus: 1 -%}
+
+  {% for item in (1..qtdParcel) reversed %}
+
+  {% if fixedFees %}
+      {% assign priceParcelWithFees =  product.price | divided_by: item  |  times: valjuros %}
+      {% else %}
+      {% case item %}
+        {% when 2 %}
+        {%- assign valjuros = settings.juros_pc_2 | replace: '%', ''| append: '.0' | divided_by: 100 |plus: 1 -%}
+        {% when 3 %}
+        {%- assign valjuros = settings.juros_pc_3 | replace: '%', ''| append: '.0' | divided_by: 100 |plus: 1 -%}
+        {% when 4 %}
+        {%- assign valjuros = settings.juros_pc_4 | replace: '%', ''| append: '.0' | divided_by: 100 |plus: 1 -%}
+        {% when 5 %}
+        {%- assign valjuros = settings.juros_pc_5 | replace: '%', ''| append: '.0' | divided_by: 100 |plus: 1 -%}
+        {% when 6 %}
+        {%- assign valjuros = settings.juros_pc_6 | replace: '%', ''| append: '.0' | divided_by: 100 |plus: 1 -%}
+       {% endcase %}
+       {%- assign priceParcelWithFees = product.price | divided_by: item | times: valjuros  -%}
+ 
+{% endif %}
+
+{% if settings.opcao_juros == 'sem_juros'  %}
+{%- assign priceParcel = product.price | divided_by: item | times: 1  -%}
+{% if minParcel <= priceParcel and item != 1 %}
+        <p class="valor-parcelado">{{ item }}x <span class="valor-parcela" data-product-id="{{product.id}}"> {{ priceParcel | money }} </span> sem juros</p>
+        {% break %}
+        {% endif %}
+{% else %} 
+{% if minParcel <= priceParcelWithFees and item != 1  %}
+        <p class="valor-parcelado">{{ item }}x <span class="valor-parcela-juros" data-product-id="{{product.id}}">{{ priceParcelWithFees | money }}</span> com juros</p>
+        {% break %}
+        {% endif %}     
+
+    {% endif %}
+  {% endfor %}
+{% endif %}

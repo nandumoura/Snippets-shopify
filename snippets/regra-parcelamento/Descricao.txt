@@ -1,0 +1,10 @@
+Instalado na: Bleque
+
+na pasta snippet adicionar o arquivo installment
+no settings_schema.json adicionar o parcelamento cuidar com a virgula antes ou depois dependendo de onde inserir
+
+adicionar o snippet no local onde irá aparecer o parcelamento
+{% render 'installment', product: product %}
+
+obs valor da parcela minima deve ser colocado 190,00 ou  190 
+caso coloque 190,0  irá pegar como 19,90

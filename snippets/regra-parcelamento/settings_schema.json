@@ -1,0 +1,113 @@
+{
+    "name": "Parcelamento",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Parcelamento"
+      },
+      {
+        "type": "checkbox",
+        "id": "installment_enable",
+        "label": "Ativar Parcelamento",
+        "default": true
+      },
+      {
+        "type": "radio",
+        "id": "opcao_juros",
+        "label": "Opção de parcelamento",
+        "options": [
+          {
+            "value": "sem_juros",
+            "label": "Sem Juros"
+          },
+          {
+            "value": "com_juros",
+            "label": "Com Juros"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "is_fixed",
+        "label": "Juros fixo ao mes",
+        "default": false,
+        "info": "Deixe marcado caso seja a mesma taxa de juros em todos os meses"
+     },
+      {
+        "type": "text",
+        "id": "juros",
+        "label": "Taxa de juros ao mês",
+        "info": "Caso seja a mesma taxa para cada mes",
+        "default": "0%"
+      },
+      {
+        "type": "text",
+        "id": "juros_pc_2",
+        "label": "Taxa de juros parcela 2",
+        "default": "0",
+        "info": "ex: 5%"
+      },
+      {
+        "type": "text",
+        "id": "juros_pc_3",
+        "label": "Taxa de juros parcela 3",
+        "default": "0",
+        "info": "ex: 5%"
+      },
+      {
+        "type": "text",
+        "id": "juros_pc_4",
+        "label": "Taxa de juros parcela 4",
+        "default": "0",
+        "info": "ex: 5%"
+      },
+      {
+        "type": "text",
+        "id": "juros_pc_5",
+        "label": "Taxa de juros parcela 5",
+        "default": "0",
+        "info": "ex: 5%"
+      },
+      {
+        "type": "text",
+        "id": "juros_pc_6",
+        "label": "Taxa de juros parcela 6",
+        "default": "0",
+        "info": "ex: 5%"
+      },
+      {
+        "type": "text",
+        "id": "min_parcel",
+        "label": "Parcela mínima R$",
+        "info": "ex: 50,00"
+      },
+      {
+        "type": "select",
+        "id": "installment",
+        "label": "Número de parcelas",
+        "options": [
+                {
+            "value": "2",
+            "label": "2x"
+          },
+          {
+            "value": "3",
+            "label": "3x"
+          },
+          {
+            "value": "4",
+            "label": "4x"
+          },
+          {
+            "value": "5",
+            "label": "5x"
+          },
+          {
+            "value": "6",
+            "label": "6x"
+          }
+        ],
+        "default": "6"
+      }
+    ]
+  }
