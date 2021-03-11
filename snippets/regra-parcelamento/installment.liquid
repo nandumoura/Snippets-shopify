@@ -8,25 +8,50 @@
 
   {%- assign priceParcel = product.price | divided_by: settings.installment | replace: 'x', '' | times: 1 -%}
   {%- assign fixedFees = settings.is_fixed -%}
-  {%- assign valjuros = settings.juros | replace: '%', ''| append: '.0' | idvided_by: 100 |plus: 1 -%}
+ 
+{% if settings.juros contains ","%}
+{%- assign valjuros = settings.juros | replace: '%', ''| replace: ',', '.' | divided_by: 100 |plus: 1 -%}
+{% else %}
+{%- assign valjuros = settings.juros | replace: '%', '' | append: '.0' | divided_by: 100 |plus: 1 -%}
 
+{% endif %}
   {% for item in (1..qtdParcel) reversed %}
 
   {% if fixedFees %}
       {% assign priceParcelWithFees =  product.price | divided_by: item  |  times: valjuros %}
-      {% else %}
+  {% else %}
       {% case item %}
         {% when 2 %}
-        {%- assign valjuros = settings.juros_pc_2 | replace: '%', ''| append: '.0' | divided_by: 100 |plus: 1 -%}
+          {% if settings.juros_pc_2 contains ","%}
+            {%- assign valjuros = settings.juros_pc_2 | replace: '%', ''| replace: ',', '.' | divided_by: 100 |plus: 1 -%}
+          {% else %}  
+            {%- assign valjuros = settings.juros_pc_2 | replace: '%', '' | append: '.0' | divided_by: 100 |plus: 1 -%}
+          {% endif %}
         {% when 3 %}
-        {%- assign valjuros = settings.juros_pc_3 | replace: '%', ''| append: '.0' | divided_by: 100 |plus: 1 -%}
+          {% if settings.juros_pc_3 contains ","%}
+            {%- assign valjuros = settings.juros_pc_3 | replace: '%', ''| replace: ',', '.' | divided_by: 100 |plus: 1 -%}
+          {% else %}  
+            {%- assign valjuros = settings.juros_pc_3 | replace: '%', '' | append: '.0' | divided_by: 100 |plus: 1 -%}
+          {% endif %}
         {% when 4 %}
-        {%- assign valjuros = settings.juros_pc_4 | replace: '%', ''| append: '.0' | divided_by: 100 |plus: 1 -%}
+          {% if settings.juros_pc_4 contains ","%}
+            {%- assign valjuros = settings.juros_pc_4 | replace: '%', ''| replace: ',', '.' | divided_by: 100 |plus: 1 -%}
+          {% else %}  
+            {%- assign valjuros = settings.juros_pc_4 | replace: '%', '' | append: '.0' | divided_by: 100 |plus: 1 -%}
+          {% endif %}
         {% when 5 %}
-        {%- assign valjuros = settings.juros_pc_5 | replace: '%', ''| append: '.0' | divided_by: 100 |plus: 1 -%}
-        {% when 6 %}
-        {%- assign valjuros = settings.juros_pc_6 | replace: '%', ''| append: '.0' | divided_by: 100 |plus: 1 -%}
-       {% endcase %}
+          {% if settings.juros_pc_5 contains ","%}
+            {%- assign valjuros = settings.juros_pc_5 | replace: '%', ''| replace: ',', '.' | divided_by: 100 |plus: 1 -%}
+          {% else %}
+            {%- assign valjuros = settings.juros_pc_5 | replace: '%', '' | append: '.0' | divided_by: 100 |plus: 1 -%}
+          {% endif %}
+      {% when 6 %}
+        {% if settings.juros_pc_6 contains ","%}
+          {%- assign valjuros = settings.juros_pc_6 | replace: '%', ''| replace: ',', '.' | divided_by: 100 |plus: 1 -%}
+        {% else %}
+          {%- assign valjuros = settings.juros_pc_6 | replace: '%', '' | append: '.0' | divided_by: 100 |plus: 1 -%}
+        {% endif %}
+      {% endcase %}
        {%- assign priceParcelWithFees = product.price | divided_by: item | times: valjuros  -%}
  
 {% endif %}
@@ -39,7 +64,7 @@
         {% endif %}
 {% else %} 
 {% if minParcel <= priceParcelWithFees and item != 1  %}
-        <p class="valor-parcelado">{{ item }}x <span class="valor-parcela-juros" data-product-id="{{product.id}}">{{ priceParcelWithFees | money }}</span> com juros</p>
+        <p class="valor-parcelado">{{ item }}x <span class="valor-parcela-juros" data-product-id="{{product.id}}">{{ priceParcelWithFees | money }}</span> {% if valjuros == 1.0 %}sem juros{% else %} com juros{% endif %}</p>
         {% break %}
         {% endif %}     
 

@@ -38,42 +38,42 @@
         "id": "juros",
         "label": "Taxa de juros ao mês",
         "info": "Caso seja a mesma taxa para cada mes",
-        "default": "0%"
+        "default": "0.00%"
       },
       {
         "type": "text",
         "id": "juros_pc_2",
         "label": "Taxa de juros parcela 2",
-        "default": "0",
-        "info": "ex: 5%"
+        "default": "0.00",
+        "info": "ex: 5.00%"
       },
       {
         "type": "text",
         "id": "juros_pc_3",
         "label": "Taxa de juros parcela 3",
-        "default": "0",
-        "info": "ex: 5%"
+        "default": "0.00",
+        "info": "ex: 5.00%"
       },
       {
         "type": "text",
         "id": "juros_pc_4",
         "label": "Taxa de juros parcela 4",
-        "default": "0",
-        "info": "ex: 5%"
+        "default": "0.00",
+        "info": "ex: 5.00%"
       },
       {
         "type": "text",
         "id": "juros_pc_5",
         "label": "Taxa de juros parcela 5",
-        "default": "0",
-        "info": "ex: 5%"
+        "default": "0.00",
+        "info": "ex: 5.00%"
       },
       {
         "type": "text",
         "id": "juros_pc_6",
         "label": "Taxa de juros parcela 6",
-        "default": "0",
-        "info": "ex: 5%"
+        "default": "0.00",
+        "info": "ex: 5.00%"
       },
       {
         "type": "text",
